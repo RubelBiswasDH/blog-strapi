@@ -48,7 +48,7 @@ const Article = () => {
                   <div className="comments">
                   <div style={{color:'red'}}>Comments</div>
                   {(articles.data[0].attributes.comments.data[0])
-                    ? <span>comments</span>
+                    ?articles.data[0].attributes.comments.data.map( comment => (<div>{comment.attributes.content}</div>))
                     : <span>no comments yet</span>
                   }
                   </div>
