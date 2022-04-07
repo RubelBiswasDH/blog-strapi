@@ -26,6 +26,10 @@
     },
     "content": {
       "type": "text"
+    },
+    "username": {
+      "type": "string",
+      "default": "Anonymous User"
     }
   }
 }

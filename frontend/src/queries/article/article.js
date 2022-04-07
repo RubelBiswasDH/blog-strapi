@@ -12,6 +12,7 @@ const ARTICLE_QUERY = gql`
           comments {
             data {
               attributes {
+                username
                 content
               }
             }

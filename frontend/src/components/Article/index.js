@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import Query from "../../components/Query";
 import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
-
 import ARTICLE_QUERY from "../../queries/article/article";
 import './index.scss';
 
@@ -35,7 +34,7 @@ const Article = () => {
 
       .then((responseJson) => {
         console.log(responseJson);
-
+        setComment('');
       })
       .catch((error) => {
         console.error(error);
@@ -83,15 +82,23 @@ const Article = () => {
                   </p>
                   <div className="comments">
                     {/* {articles.data[0].id} */}
-                    <div style={{color:'red'}}>Comments</div>
+                    <div className="title" >Comments</div>
                     {(articles.data[0].attributes.comments.data[0])
-                      ?articles.data[0].attributes.comments.data.map( (comment,i) => (<div key={i}>{comment.attributes.content}</div>))
+                      ?articles.data[0].attributes.comments.data.map( (comment,i) => (
+                        <div className="content" key={i}>
+                          <div className="username">
+                            {(comment.attributes.username)?comment.attributes.username:"Anonymous"}
+                          </div>
+                          <div className="comment" >{comment.attributes.content}</div>
+                        </div>
+                      ))
                       : <span>no comments yet</span>
                     }
                   </div>
-                  <div >
-                    <textarea onChange={handleChange} value={comment} rows="4" cols="50"></textarea>
-                    <button onClick={(e) => handleSubmit(e,articles.data[0].id)}>Submit</button>
+                  <div style={{display:"flex",flexDirection:'column'}} className="comment-box">
+                    <textarea onChange={handleChange} value={comment} className="form-control" rows="3"></textarea>
+                    <button className="button-comment" onClick={(e) => handleSubmit(e,articles.data[0].id)}>Comment</button>
+
                   </div>
                 </div>
                 
