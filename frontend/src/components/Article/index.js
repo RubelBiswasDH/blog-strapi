@@ -9,7 +9,43 @@ import './index.scss';
 
 const Article = () => {
   let { slug } = useParams();
+  const [comment,setComment] = React.useState('');
 
+  const handleSubmit = (e,id) => {
+    e.preventDefault();
+
+    const apiUrl = "http://localhost:1337/api/comments";
+    fetch(apiUrl, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body:JSON.stringify({
+        "data":{
+          "article": id,
+          "content": comment
+        }
+       })
+     } )
+      .then((response) => {
+        console.log(response.status);
+        if (response.status === 400) {
+          return Promise.reject("Invalid input")
+        }
+        return response.json()
+      })
+
+      .then((responseJson) => {
+        console.log(responseJson);
+
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  const handleChange = (e) => {
+    setComment(e.target.value)
+    //console.log(comment)
+  }
   return (
     <Query query={ARTICLE_QUERY} slug={slug}>
       {({ data: { articles } }) => {
@@ -46,11 +82,16 @@ const Article = () => {
                     </Moment>
                   </p>
                   <div className="comments">
-                  <div style={{color:'red'}}>Comments</div>
-                  {(articles.data[0].attributes.comments.data[0])
-                    ? <span>comments</span>
-                    : <span>no comments yet</span>
-                  }
+                    {/* {articles.data[0].id} */}
+                    <div style={{color:'red'}}>Comments</div>
+                    {(articles.data[0].attributes.comments.data[0])
+                      ?articles.data[0].attributes.comments.data.map( (comment,i) => (<div key={i}>{comment.attributes.content}</div>))
+                      : <span>no comments yet</span>
+                    }
+                  </div>
+                  <div >
+                    <textarea onChange={handleChange} value={comment} rows="4" cols="50"></textarea>
+                    <button onClick={(e) => handleSubmit(e,articles.data[0].id)}>Submit</button>
                   </div>
                 </div>
                 
