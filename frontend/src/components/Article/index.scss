@@ -19,4 +19,47 @@
     p img{
         max-height: 100vh;
     }
-}
+    .comments{
+        display: flex; 
+        flex-direction: column;
+        gap:.5vw;
+     
+        .title{
+            font-weight: 500;
+            color: rgb(3, 26, 18);
+            font-size: larger;
+        }
+        .content{
+            padding:1vw;
+            padding-top:.5vw;
+            padding-bottom:.5vw;
+            background-color: beige;
+        }
+        .username{
+            color: blue;
+            font-weight:200;
+            font-size: 1.2vw;
+        }
+        .comment{
+            padding-left: .2vw;
+            color:black;
+            font-size: .9vw;
+        }
+    }
+    .comment-box{
+        display: flex;
+        flex-direction: column; 
+        gap:5px;
+        margin-top: 1vw;
+        .button-comment{
+            border-radius:5px;
+            outline: blue;
+            background-color:green;
+            color:rgb(230, 224, 222);
+            font-size: 2vh;
+            height: 5vh;
+            font-weight: bold;
+        }
+    
+}}
+

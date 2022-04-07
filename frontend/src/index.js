@@ -9,6 +9,9 @@ import App from "./containers/App";
 import client from "./utils/apolloClient";
 
 import "./index.css";
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.bundle'
+
 
 ReactDOM.render(
   <Router>
